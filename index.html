@@ -517,11 +517,10 @@
                 <div class="guide-step">
                     <div class="step-number">9</div>
                     <div>饮料：ta喜欢的饮料？</div>
+                </div>
             </div>
         </div>
     
-        </div>
-        
         <div class="counter">已选择: <span id="selected-count">0</span>/9 张图片</div>
         
         <div class="grid-container" id="grid-container">
@@ -675,7 +674,7 @@
             });
         }
         
-        // 生成九宫格大图
+        // 生成九宫格大图（修改后）
         function generateCollage() {
             const canvas = document.createElement('canvas');
             canvas.width = 900;
@@ -686,7 +685,7 @@
             ctx.fillStyle = 'white';
             ctx.fillRect(0, 0, 900, 900);
             
-            // 绘制每张图片
+            // 绘制每张图片（带圆角和文字标题）
             const promises = [];
             
             for (let i = 0; i < 9; i++) {
@@ -701,15 +700,54 @@
                         const x = col * 300;
                         const y = row * 300;
                         
+                        // 绘制圆角矩形背景
+                        ctx.fillStyle = '#f8f9fa';
+                        drawRoundedRect(ctx, x, y, 300, 300, 8);
+                        ctx.fill();
+                        
                         // 绘制图片（居中缩小）
-                       const scale = Math.min(300 / img.width, 300 / img.height);
-const newWidth = img.width * scale;
-const newHeight = img.height * scale;
-
-const dx = x + (300 - newWidth) / 2;
-const dy = y + (300 - newHeight) / 2;
-
-ctx.drawImage(img, dx, dy, newWidth, newHeight);
+                        const scale = Math.min(300 / img.width, 300 / img.height);
+                        const newWidth = img.width * scale;
+                        const newHeight = img.height * scale;
+                        
+                        const dx = x + (300 - newWidth) / 2;
+                        const dy = y + (300 - newHeight) / 2;
+                        
+                        // 在圆角矩形内绘制图片
+                        ctx.save();
+                        drawRoundedRect(ctx, x, y, 300, 300, 8);
+                        ctx.clip();
+                        ctx.drawImage(img, dx, dy, newWidth, newHeight);
+                        ctx.restore();
+                        
+                        // 绘制边框
+                        ctx.strokeStyle = '#ffafbd';
+                        ctx.lineWidth = 2;
+                        drawRoundedRect(ctx, x, y, 300, 300, 8);
+                        ctx.stroke();
+                        
+                        // 绘制标题背景
+                        ctx.fillStyle = 'rgba(255, 107, 107, 0.85)';
+                        ctx.beginPath();
+                        ctx.moveTo(x + 8, y + 270);
+                        ctx.lineTo(x + 292, y + 270);
+                        ctx.arcTo(x + 300, y + 270, x + 300, y + 278, 8);
+                        ctx.lineTo(x + 300, y + 292);
+                        ctx.arcTo(x + 300, y + 300, x + 292, y + 300, 8);
+                        ctx.lineTo(x + 8, y + 300);
+                        ctx.arcTo(x, y + 300, x, y + 292, 8);
+                        ctx.lineTo(x, y + 278);
+                        ctx.arcTo(x, y + 270, x + 8, y + 270, 8);
+                        ctx.closePath();
+                        ctx.fill();
+                        
+                        // 绘制标题文字
+                        ctx.fillStyle = 'white';
+                        ctx.font = 'bold 16px Arial, sans-serif';
+                        ctx.textAlign = 'left';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(themes[i].title, x + 15, y + 285);
+                        
                         resolve();
                     };
                     
@@ -739,6 +777,21 @@ ctx.drawImage(img, dx, dy, newWidth, newHeight);
                     alert("生成图片时出错，请确保所有图片都已正确上传");
                 }
             });
+        }
+        
+        // 绘制圆角矩形路径
+        function drawRoundedRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.arcTo(x + width, y, x + width, y + radius, radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.arcTo(x + width, y + height, x + width - radius, y + height, radius);
+            ctx.lineTo(x + radius, y + height);
+            ctx.arcTo(x, y + height, x, y + height - radius, radius);
+            ctx.lineTo(x, y + radius);
+            ctx.arcTo(x, y, x + radius, y, radius);
+            ctx.closePath();
         }
         
         // 重置所有内容
