@@ -477,48 +477,6 @@
             <p>完成后点击"生成图片"按钮，即可下载900×900像素的情侣九宫格大图</p>
         </div>
         
-        <div class="guide-container">
-            <div class="guide-title">使用指南</div>
-            <p>为每个主题选择一张图片，表达你们对彼此的看法：</p>
-            
-            <div class="guide-steps">
-                <div class="guide-step">
-                    <div class="step-number">1</div>
-                    <div>动物：ta喜欢的动物？</div>
-                </div>
-                <div class="guide-step">
-                    <div class="step-number">2</div>
-                    <div>地方：ta最爱的地方？</div>
-                </div>
-                <div class="guide-step">
-                    <div class="step-number">3</div>
-                    <div>植物：ta喜欢的植物？</div>
-                </div>
-                <div class="guide-step">
-                    <div class="step-number">4</div>
-                    <div>角色：ta喜欢的影视角色？</div>
-                </div>
-                <div class="guide-step">
-                    <div class="step-number">5</div>
-                    <div>季节：ta喜欢的季节？</div>
-                </div>
-                <div class="guide-step">
-                    <div class="step-number">6</div>
-                    <div>爱好：ta平时的爱好？</div>
-                </div>
-                <div class="guide-step">
-                    <div class="step-number">7</div>
-                    <div>食物：ta喜欢的食物？</div>
-                </div>
-                <div class="guide-step">
-                    <div class="step-number">8</div>
-                    <div>颜色：ta喜欢的颜色？</div>
-                </div>
-                <div class="guide-step">
-                    <div class="step-number">9</div>
-                    <div>饮料：ta喜欢的饮料？</div>
-                </div>
-            </div>
         </div>
     
         <div class="counter">已选择: <span id="selected-count">0</span>/9 张图片</div>
@@ -564,15 +522,15 @@
     <script>
         // 定义每个格子的主题
         const themes = [
-            { number: 1, title: "动物", desc: "对方像什么动物？" },
-            { number: 2, title: "地方", desc: "你们最爱的地方" },
-            { number: 3, title: "植物", desc: "代表对方性格的植物" },
-            { number: 4, title: "角色", desc: "对方在你生活中的角色" },
-            { number: 5, title: "季节", desc: "你们的爱情像什么季节？" },
-            { number: 6, title: "爱好", desc: "你们共同的爱好" },
-            { number: 7, title: "食物", desc: "代表你们爱情的食物" },
-            { number: 8, title: "颜色", desc: "代表你们爱情的颜色" },
-            { number: 9, title: "饮料", desc: "你们的爱情像什么饮料？" }
+            { number: 1, title: "ta喜欢的动物", desc: "对方像什么动物？" },
+            { number: 2, title: "ta喜欢的地方", desc: "你们最爱的地方" },
+            { number: 3, title: "ta喜欢的植物", desc: "代表对方性格的植物" },
+            { number: 4, title: "ta喜欢的影视角色", desc: "对方在你生活中的角色" },
+            { number: 5, title: "ta喜欢的季节", desc: "你们的爱情像什么季节？" },
+            { number: 6, title: "ta平时的爱好", desc: "你们共同的爱好" },
+            { number: 7, title: "ta喜欢的食物", desc: "代表你们爱情的食物" },
+            { number: 8, title: "ta喜欢的颜色", desc: "代表你们爱情的颜色" },
+            { number: 9, title: "ta喜欢的饮料", desc: "你们的爱情像什么饮料？" }
         ];
         
         // 创建漂浮的爱心
