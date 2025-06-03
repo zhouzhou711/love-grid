@@ -492,15 +492,15 @@
                 </div>
                 <div class="guide-step">
                     <div class="step-number">3</div>
-                    <div>植物：ta喜欢什么植物</div>
+                    <div>植物：ta喜欢的植物？</div>
                 </div>
                 <div class="guide-step">
                     <div class="step-number">4</div>
-                    <div>角色：ta喜欢什么影视角色</div>
+                    <div>角色：ta喜欢的影视角色？</div>
                 </div>
                 <div class="guide-step">
                     <div class="step-number">5</div>
-                    <div>季节：ta喜欢什么季节？</div>
+                    <div>季节：ta喜欢的季节？</div>
                 </div>
                 <div class="guide-step">
                     <div class="step-number">6</div>
@@ -519,53 +519,7 @@
                     <div>饮料：ta喜欢的饮料？</div>
             </div>
         </div>
-        
-        <div class="theme-grid">
-            <div class="theme-item">
-                <div class="theme-number">1</div>
-                <div class="theme-title">动物</div>
-                <div class="theme-desc">对方像什么动物？可爱还是威猛？</div>
-            </div>
-            <div class="theme-item">
-                <div class="theme-number">2</div>
-                <div class="theme-title">地方</div>
-                <div class="theme-desc">你们最爱的地方或梦想之地</div>
-            </div>
-            <div class="theme-item">
-                <div class="theme-number">3</div>
-                <div class="theme-title">植物</div>
-                <div class="theme-desc">代表对方性格的植物</div>
-            </div>
-            <div class="theme-item">
-                <div class="theme-number">4</div>
-                <div class="theme-title">角色</div>
-                <div class="theme-desc">对方在你生活中的角色</div>
-            </div>
-            <div class="theme-item">
-                <div class="theme-number">5</div>
-                <div class="theme-title">季节</div>
-                <div class="theme-desc">你们的爱情像什么季节？</div>
-            </div>
-            <div class="theme-item">
-                <div class="theme-number">6</div>
-                <div class="theme-title">爱好</div>
-                <div class="theme-desc">你们共同的爱好</div>
-            </div>
-            <div class="theme-item">
-                <div class="theme-number">7</div>
-                <div class="theme-title">食物</div>
-                <div class="theme-desc">代表你们爱情的食物</div>
-            </div>
-            <div class="theme-item">
-                <div class="theme-number">8</div>
-                <div class="theme-title">颜色</div>
-                <div class="theme-desc">代表你们爱情的颜色</div>
-            </div>
-            <div class="theme-item">
-                <div class="theme-number">9</div>
-                <div class="theme-title">饮料</div>
-                <div class="theme-desc">你们的爱情像什么饮料？</div>
-            </div>
+    
         </div>
         
         <div class="counter">已选择: <span id="selected-count">0</span>/9 张图片</div>
@@ -747,14 +701,15 @@
                         const x = col * 300;
                         const y = row * 300;
                         
-                        // 绘制图片（居中裁剪）
-                        const scale = Math.max(300 / img.width, 300 / img.height);
-                        const newWidth = img.width * scale;
-                        const newHeight = img.height * scale;
-                        const offsetX = (newWidth - 300) / 2;
-                        const offsetY = (newHeight - 300) / 2;
-                        
-                        ctx.drawImage(img, -offsetX, -offsetY, newWidth, newHeight, x, y, 300, 300);
+                        // 绘制图片（居中缩小）
+                       const scale = Math.min(300 / img.width, 300 / img.height);
+const newWidth = img.width * scale;
+const newHeight = img.height * scale;
+
+const dx = x + (300 - newWidth) / 2;
+const dy = y + (300 - newHeight) / 2;
+
+ctx.drawImage(img, dx, dy, newWidth, newHeight);
                         resolve();
                     };
                     
